@@ -6,6 +6,8 @@ import plotly.express as px
 def create_test_df(dataset='stocks'):
     if dataset == 'stocks':
         return px.data.stocks().melt(id_vars=['date'], var_name='ticker', value_name='price')
+    elif dataset == 'gapminder':
+        return px.data.gapminder()
     elif dataset == 'random':
         num_rows = 50
         np.random.seed(1)
