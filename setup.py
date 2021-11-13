@@ -23,7 +23,7 @@ setup(
     description='Python package for plotting',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://https://github.com/tahini-dev/pictorial',
+    url='https://github.com/tahini-dev/pictorial',
     packages=find_packages(exclude=('tests',)),
     install_requires=install_requires,
     extras_require=extras_require,
