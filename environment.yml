@@ -1,0 +1,8 @@
+# this is for binder
+name: pictorial
+channels:
+  - conda-forge
+dependencies:
+  - pip
+  - pip:
+    - .[all]
