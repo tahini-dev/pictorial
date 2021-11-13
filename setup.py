@@ -6,6 +6,7 @@ with open('README.md', 'r') as fh:
 install_requires = [
     'pandas',
     'plotly',
+    'numpy',
 ]
 
 extras_require = {
