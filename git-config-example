@@ -1,0 +1,19 @@
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
+[remote "origin"]
+	url = git@github.com-tahini-dev:tahini-dev/pictorial.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "main"]
+	remote = origin
+	merge = refs/heads/main
+[user]
+	name = tahini-dev
+	email = tahini.dev@gmail.com
+[alias]
+	st = status
+	add-notebook = !jupyter nbconvert --clear-output --inplace $1 && git add $1
