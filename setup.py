@@ -17,7 +17,7 @@ extras_require['all'] = sorted(set(sum(extras_require.values(), [])))
 
 setup(
     name='pictorial',
-    version='2021.11.0',
+    version='2021.11.1',
     author='tahini-dev',
     author_email='tahini.dev@gmail.com',
     description='Python package for plotting',
