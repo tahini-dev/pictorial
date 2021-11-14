@@ -2,16 +2,16 @@ from __future__ import annotations
 from typing import Optional
 from uuid import uuid4
 
-import pandas as pd
+import pandas
 
 from pictorial.utility import Index, validate_index
 
 
 def describe(
-        df: pd.DataFrame,
+        df: pandas.DataFrame,
         column: str,
         by: Optional[Index] = None,
-) -> pd.DataFrame:
+) -> pandas.DataFrame:
 
     by = validate_index(by)
     by_empty = len(by) == 0
