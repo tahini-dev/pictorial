@@ -4,6 +4,7 @@ import pandas
 import plotly.express
 import plotly.graph_objects
 
+from pictorial.utility import Dict, get_order
 import pictorial.aggregate
 
 __all__ = [
@@ -18,6 +19,7 @@ def bar(
         color: Optional[str] = None,
         facet_col: Optional[str] = None,
         facet_row: Optional[str] = None,
+        category_orders: Optional[Dict] = None,
         *args,
         **kwargs,
 ) -> plotly.graph_objects.Figure:
@@ -36,6 +38,13 @@ def bar(
     if facet_row is not None:
         by.append(facet_row)
 
+    if category_orders is None:
+        category_orders = dict()
+
+    for column in by:
+        category_orders[column] = get_order(df=df, column=column, column_value=y, prepared_orders=category_orders)
+
+    # The following could be replaced by a generic aggregator
     df_aggregated = pictorial.aggregate.sum(df=df, column=y, by=by)
 
     return plotly.express.bar(
@@ -45,6 +54,7 @@ def bar(
         color=color,
         facet_col=facet_col,
         facet_row=facet_row,
+        category_orders=category_orders,
         *args,
         **kwargs,
     )

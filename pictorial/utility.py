@@ -4,9 +4,12 @@ from typing import Union, Optional, List, Dict, Callable
 import pandas
 
 __all__ = [
+    'get_order',
     'validate_index',
     'Index',
     'Aggregator',
+    'Dict',
+    'List',
 ]
 
 if sys.version_info >= (3, 9):
@@ -44,7 +47,7 @@ def get_order(
 ) -> List:
 
     if how is None:
-        how = 'count'
+        how = 'value'
     how = how.casefold()
 
     if ascending is None:
