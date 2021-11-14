@@ -6,6 +6,7 @@ import pandas
 from pictorial.utility import validate_index, Index, Aggregator
 
 __all__ = [
+    'generic',
     'describe',
     'sum',
 ]
