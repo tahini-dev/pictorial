@@ -9,6 +9,7 @@ __all__ = [
     'Index',
     'Aggregator',
     'CategoryOrders',
+    'List',
 ]
 
 if sys.version_info >= (3, 9):

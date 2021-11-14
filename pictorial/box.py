@@ -4,7 +4,7 @@ from uuid import uuid4
 import pandas
 import plotly.graph_objects
 
-from pictorial.utility import get_order, CategoryOrders
+from pictorial.utility import get_order, CategoryOrders, List
 import pictorial.aggregate
 
 __all__ = [
@@ -92,7 +92,7 @@ def plot(
 def add_trace(
         figure: plotly.graph_objects.Figure,
         df: pandas.DataFrame,
-        x: Optional[list[str]] = None,
+        x: Optional[List[str]] = None,
         name: Optional[str] = None,
         mean: Optional[bool] = None,
         sd: Optional[bool] = None,
