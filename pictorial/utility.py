@@ -1,5 +1,5 @@
 import sys
-from typing import Union, Optional, List, Dict, Callable
+from typing import Union, Optional, List, Dict, Callable, Any
 
 import pandas
 
@@ -8,8 +8,7 @@ __all__ = [
     'validate_index',
     'Index',
     'Aggregator',
-    'Dict',
-    'List',
+    'CategoryOrders',
 ]
 
 if sys.version_info >= (3, 9):
@@ -18,6 +17,7 @@ if sys.version_info >= (3, 9):
 
 Index = Union[str, List[str], pandas.Index, pandas.Series]
 Aggregator = Union[Callable, str, List, Dict]
+CategoryOrders = Dict[str, List]
 
 
 def validate_index(
@@ -43,7 +43,7 @@ def get_order(
         ascending: Optional[bool] = None,
         column_value: Optional[str] = None,
         aggregator_value: Optional[Aggregator] = None,
-        prepared_orders: Optional[Dict[str, List]] = None,
+        prepared_orders: Optional[CategoryOrders] = None,
 ) -> List:
 
     if how is None:

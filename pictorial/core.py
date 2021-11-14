@@ -4,7 +4,7 @@ import pandas
 import plotly.express
 import plotly.graph_objects
 
-from pictorial.utility import Dict, get_order
+from pictorial.utility import CategoryOrders, get_order
 import pictorial.aggregate
 
 __all__ = [
@@ -19,7 +19,7 @@ def bar(
         color: Optional[str] = None,
         facet_col: Optional[str] = None,
         facet_row: Optional[str] = None,
-        category_orders: Optional[Dict] = None,
+        category_orders: Optional[CategoryOrders] = None,
         *args,
         **kwargs,
 ) -> plotly.graph_objects.Figure:
