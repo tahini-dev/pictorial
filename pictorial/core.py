@@ -4,8 +4,8 @@ import pandas
 import plotly.express
 import plotly.graph_objects
 
-from pictorial.utility import CategoryOrders, get_order
 import pictorial.aggregate
+from pictorial.utility import CategoryOrders, get_order
 
 __all__ = [
     'bar',

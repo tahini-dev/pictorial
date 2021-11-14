@@ -1,5 +1,5 @@
 import sys
-from typing import Union, Optional, List, Dict, Callable, Any
+from typing import Union, Optional, List, Dict, Callable
 
 import pandas
 
