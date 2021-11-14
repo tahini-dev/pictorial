@@ -4,7 +4,7 @@ with open('README.md', 'r') as fh:
     long_description = fh.read()
 
 install_requires = [
-    'pandas',
+    'pandas>=1.1.0',
     'plotly',
     'numpy',
 ]

@@ -1,4 +1,4 @@
-from typing import Optional, Union, Callable
+from typing import Optional
 from uuid import uuid4
 
 import pandas
