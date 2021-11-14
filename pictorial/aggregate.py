@@ -1,18 +1,19 @@
-from typing import Optional
+from typing import Optional, Union, Callable
 from uuid import uuid4
 
 import pandas
 
-from pictorial.utility import Index, validate_index
+from pictorial.utility import validate_index, Index, Aggregator
 
 __all__ = [
     'describe',
 ]
 
 
-def describe(
+def generic(
         df: pandas.DataFrame,
         column: str,
+        aggregator: Aggregator,
         by: Optional[Index] = None,
 ) -> pandas.DataFrame:
 
@@ -26,15 +27,23 @@ def describe(
         df[column_temp] = 0
         by = [column_temp]
 
-    df_describe = (
+    df_aggregated = (
         df
         .groupby(by=by)
         [column]
-        .describe()
+        .aggregate(aggregator)
         .reset_index()
     )
 
     if by_empty:
-        df_describe = df_describe.drop(columns=by)
+        df_aggregated = df_aggregated.drop(columns=by)
 
-    return df_describe
+    return df_aggregated
+
+
+def describe(
+        df: pandas.DataFrame,
+        column: str,
+        by: Optional[Index] = None,
+) -> pandas.DataFrame:
+    return generic(df=df, column=column, aggregator='describe', by=by)

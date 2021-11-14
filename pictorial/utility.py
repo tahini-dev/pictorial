@@ -1,17 +1,20 @@
 import sys
-from typing import Union, Optional, List
+from typing import Union, Optional, List, Dict, Callable
 
 import pandas
 
 __all__ = [
-    'Index',
     'validate_index',
+    'Index',
+    'Aggregator',
 ]
 
 if sys.version_info >= (3, 9):
     List = list
+    Dict = dict
 
 Index = Union[str, List[str], pandas.Index, pandas.Series]
+Aggregator = Union[Callable, str, List, Dict]
 
 
 def validate_index(
