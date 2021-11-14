@@ -8,11 +8,11 @@ import pictorial.aggregate
 from pictorial.utility import CategoryOrders, get_order
 
 __all__ = [
-    'bar',
+    'plot',
 ]
 
 
-def bar(
+def plot(
         df: pandas.DataFrame,
         y: str,
         x: Optional[str] = None,
