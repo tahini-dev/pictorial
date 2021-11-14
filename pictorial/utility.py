@@ -15,8 +15,10 @@ if sys.version_info >= (3, 9):
 Index = Union[str, List[str], pandas.Index, pandas.Series]
 
 
-def _validate_index(
+def validate_index(
         value: Optional[Index] = None,
+        # Add next line in once we do not support python 3.7 which makes this function only take in positional arguments
+        # /,
 ) -> List[str]:
 
     if value is None:
@@ -27,14 +29,3 @@ def _validate_index(
         return [value]
     else:
         return list(value)
-
-
-# This is before python 3.7 does not support positional only arguments
-if sys.version_info <= (3, 7):
-    validate_index = _validate_index
-else:
-    def validate_index(
-            value: Optional[Index] = None,
-            /,
-    ) -> List[str]:
-        return _validate_index(value)
