@@ -1,10 +1,13 @@
-from __future__ import annotations
 from typing import Optional
 from uuid import uuid4
 
 import pandas
 
 from pictorial.utility import Index, validate_index
+
+__all__ = [
+    'describe',
+]
 
 
 def describe(
