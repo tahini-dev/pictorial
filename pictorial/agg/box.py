@@ -18,6 +18,7 @@ def box(
         order_ascending: Optional[bool] = None,
         category_orders: Optional[dict[str, list]] = None,
 ) -> go.Figure:
+
     groupby_columns = []
 
     if x is None:

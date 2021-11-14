@@ -31,3 +31,56 @@ def validate_index(
         return [value]
     else:
         return list(value)
+
+
+def get_order(
+        df: pandas.DataFrame,
+        column: str,
+        how: Optional[str] = None,
+        ascending: Optional[bool] = None,
+        column_value: Optional[str] = None,
+        aggregator_value: Optional[Aggregator] = None,
+        prepared_orders: Optional[Dict[str, List]] = None,
+) -> List:
+
+    if how is None:
+        how = 'count'
+    how = how.casefold()
+
+    if ascending is None:
+        if how == 'name':
+            ascending = True
+        else:
+            ascending = False
+
+    if aggregator_value is None:
+        aggregator_value = 'sum'
+
+    if prepared_orders is None:
+        prepared_orders = dict()
+
+    if how == 'count':
+        order_from_df = df[column].value_counts().sort_values(ascending=ascending).index.tolist()
+    elif how == 'name':
+        order_from_df = df[column].drop_duplicates().sort_values(ascending=ascending).tolist()
+    elif how == 'value':
+        order_from_df = (
+            df
+            .groupby(column)
+            [column_value]
+            .aggregate(aggregator_value)
+            .sort_values(ascending=ascending)
+            .index
+            .tolist()
+        )
+    else:
+        raise NotImplementedError(f"Not implemented for ordering 'how': {how}")
+
+    order_from_category_orders = prepared_orders.get(column, list())
+    num_from_category_orders = len(order_from_category_orders)
+
+    order = dict(zip(order_from_category_orders, range(num_from_category_orders)))
+    for rank, value in enumerate(order_from_df, start=num_from_category_orders):
+        order[value] = order.get(value, rank)
+
+    return sorted(order.keys(), key=lambda x: order[x])

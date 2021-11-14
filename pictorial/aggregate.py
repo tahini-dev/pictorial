@@ -30,7 +30,10 @@ def generic(
 
     df_aggregated = (
         df
-        .groupby(by=by)
+        .groupby(
+            by=by,
+            sort=True,
+        )
         [column]
         .aggregate(aggregator)
         .reset_index()
