@@ -1,6 +1,6 @@
 from __future__ import annotations
-
-from typing import Union, Optional
+import sys
+from typing import Union, Optional, List
 
 import pandas
 
@@ -9,13 +9,16 @@ __all__ = [
     'validate_index',
 ]
 
-Index = Union[str, list[str], pandas.Index, pandas.Series]
+if sys.version_info >= (3, 9):
+    List = list
+
+Index = Union[str, List[str], pandas.Index, pandas.Series]
 
 
 def validate_index(
         value: Optional[Index] = None,
         /,
-) -> list[str]:
+) -> List[str]:
 
     if value is None:
         return []
