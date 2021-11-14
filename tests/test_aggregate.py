@@ -18,6 +18,12 @@ def test_error_generic(args, kwargs, expected_error, expected_message):
 
 
 @pytest.mark.parametrize('args, kwargs, expected', [
+    # Empty dataframe - count
+    (
+        [],
+        dict(df=pandas.DataFrame(columns=['test']), column='test', aggregator='count'),
+        pd.DataFrame(columns=['test'], index=range(0)).astype('int64'),
+    ),
     # Empty dataframe - sum
     (
         [],
@@ -30,11 +36,54 @@ def test_error_generic(args, kwargs, expected_error, expected_message):
         dict(df=pandas.DataFrame(columns=['test']), column='test', aggregator=sum),
         pd.DataFrame(columns=['test'], index=range(0)),
     ),
-    # Empty dataframe - count
+    # Non empty dataframe - count
     (
         [],
-        dict(df=pandas.DataFrame(columns=['test']), column='test', aggregator='count'),
-        pd.DataFrame(columns=['test'], index=range(0)).astype('int64'),
+        dict(df=pandas.DataFrame(dict(test=[0, 1, 2])), column='test', aggregator='count'),
+        pd.DataFrame(dict(test=[3])),
+    ),
+    # Non empty dataframe with group-by columns - count
+    (
+        [],
+        dict(
+            df=pandas.DataFrame(dict(test=[0, 1, 2], test_by=[1, 2, 1])),
+            column='test',
+            aggregator='count',
+            by='test_by',
+        ),
+        pd.DataFrame(dict(test_by=[1, 2], test=[2, 1])),
+    ),
+    # Non empty dataframe with additional columns - count
+    (
+        [],
+        dict(
+            df=pandas.DataFrame(dict(test=[0, 1, 2], test_by=[1, 2, 1])),
+            column='test',
+            aggregator='count',
+        ),
+        pd.DataFrame(dict(test=[3])),
+    ),
+    # Non empty dataframe with multiple group-by columns - count
+    (
+        [],
+        dict(
+            df=pandas.DataFrame(dict(test=[0, 1, 2], test_by_1=[1, 2, 1], test_by_2=['a', 'b', 'c'])),
+            column='test',
+            aggregator='count',
+            by=['test_by_1', 'test_by_2']
+        ),
+        pd.DataFrame(dict(test_by_1=[1, 1, 2], test_by_2=['a', 'c', 'b'], test=[1, 1, 1])),
+    ),
+    # Non empty dataframe with multiple group-by columns with different order - count
+    (
+        [],
+        dict(
+            df=pandas.DataFrame(dict(test=[0, 1, 2], test_by_1=[1, 2, 1], test_by_2=['a', 'b', 'c'])),
+            column='test',
+            aggregator='count',
+            by=['test_by_2', 'test_by_1']
+        ),
+        pd.DataFrame(dict(test_by_2=['a', 'b', 'c'], test_by_1=[1, 2, 1], test=[1, 1, 1])),
     ),
 ])
 def test_generic(args, kwargs, expected):
