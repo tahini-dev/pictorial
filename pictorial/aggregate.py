@@ -7,6 +7,7 @@ from pictorial.utility import validate_index, Index, Aggregator
 
 __all__ = [
     'describe',
+    'sum',
 ]
 
 
@@ -47,3 +48,11 @@ def describe(
         by: Optional[Index] = None,
 ) -> pandas.DataFrame:
     return generic(df=df, column=column, aggregator='describe', by=by)
+
+
+def sum(
+        df: pandas.DataFrame,
+        column: str,
+        by: Optional[Index] = None,
+) -> pandas.DataFrame:
+    return generic(df=df, column=column, aggregator='sum', by=by)

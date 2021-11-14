@@ -209,3 +209,15 @@ def make_dataframe_describe(count, mean, std, min, lower_quartile, median, upper
 def test_describe(args, kwargs, expected):
     actual = pictorial.aggregate.describe(*args, **kwargs)
     pandas.testing.assert_frame_equal(expected, actual)
+
+
+@pytest.mark.parametrize('args, kwargs, expected', [
+    (
+        [],
+        dict(df=pandas.DataFrame(dict(test=[1, 2, 3], test_by=[1, 2, 1])), column='test', by='test_by'),
+        pd.DataFrame(dict(test_by=[1, 2], test=[4, 2])),
+    ),
+])
+def test_sum(args, kwargs, expected):
+    actual = pictorial.aggregate.sum(*args, **kwargs)
+    pandas.testing.assert_frame_equal(expected, actual)
