@@ -24,6 +24,8 @@ def plot(
         category_orders: Optional[CategoryOrders] = None,
 ) -> plotly.graph_objects.Figure:
 
+    df = df.copy()
+
     by = []
 
     if x is None:

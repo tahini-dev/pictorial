@@ -19,6 +19,8 @@ def generic(
         by: Optional[Index] = None,
 ) -> pandas.DataFrame:
 
+    df = df.copy()
+
     by = validate_index(by)
     by_empty = len(by) == 0
 
