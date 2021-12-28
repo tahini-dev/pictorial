@@ -5,8 +5,8 @@ with open('README.md', 'r') as fh:
 
 install_requires = [
     'pandas>=1.1.0',
-    'plotly',
-    'numpy',
+    'plotly>=5.5.0',
+    'numpy>=1.12.5',
 ]
 
 extras_require = {
@@ -17,7 +17,7 @@ extras_require['all'] = sorted(set(sum(extras_require.values(), [])))
 
 setup(
     name='pictorial',
-    version='2021.11.2',
+    version='2021.12.1',
     author='tahini-dev',
     author_email='tahini.dev@gmail.com',
     description='Python package for plotting',
