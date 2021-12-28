@@ -5,8 +5,6 @@ import pytest
 import pictorial.core.bar
 import pictorial.testing
 
-NAN = float('nan')
-
 
 @pytest.mark.parametrize('args, kwargs, expected', [
     # Simple test with one bar and no optional arguments
