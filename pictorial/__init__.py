@@ -4,6 +4,7 @@ from pictorial.core.corr import plot as corr
 from pictorial.core.subplots import make as make_subplots
 import pictorial.aggregate as aggregate
 import pictorial.utility as utility
+import pictorial.testing as testing
 
 __all__ = [
     'bar',
@@ -12,4 +13,5 @@ __all__ = [
     'make_subplots',
     'aggregate',
     'utility',
+    'testing',
 ]

@@ -3,7 +3,7 @@ import pandas as pd
 import pytest
 
 import pictorial.core.corr
-import tests.util
+import pictorial.testing
 
 NAN = float('nan')
 
@@ -12,16 +12,18 @@ NAN = float('nan')
     (
         (pd.DataFrame([range(10)] * 2).T,),
         dict(),
-        {
-            'x': np.array([0, 1], dtype=np.int64),
-            'y': np.array([0, 1], dtype=np.int64),
-            'z': np.array([[np.nan, np.nan], [1., np.nan]])
-        },
+        dict(
+            data=[dict(
+                x=np.array([0, 1], dtype=np.int64),
+                y=np.array([0, 1], dtype=np.int64),
+                z=np.array([[np.nan, np.nan], [1., np.nan]]),
+            )],
+        ),
     ),
 ])
-def test_get_corr_fig(args, kwargs, expected):
+def test_plot(args, kwargs, expected):
     actual = pictorial.core.corr.plot(*args, **kwargs)
-    tests.util.assert_heatmap_equals(expected, actual.data[0])
+    pictorial.testing.assert_equals(expected, actual)
 
 
 @pytest.mark.parametrize('args, kwargs, expected', [
